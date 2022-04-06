@@ -1,8 +1,8 @@
-from first_sketch import FirstSketch
+from lines_sketch_a import LinesSketchA
 
 
 def main():
-    sketch = FirstSketch()
+    sketch = LinesSketchA()
     sketch.run_sketch()
 
 
