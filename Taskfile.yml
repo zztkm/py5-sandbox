@@ -1,0 +1,33 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  default:
+    cmds:
+      - task: isort
+      - task: black
+      - task: mypy
+
+  isort:
+    cmds:
+      - poetry run isort
+
+  black:
+    cmds:
+      - poetry run black
+
+  mypy:
+    cmds:
+      - poetry run mypy
+
+  test:
+    cmds:
+      - poetry run pytest
+  
+  run:
+    cmds:
+      - poetry run python src/main.py

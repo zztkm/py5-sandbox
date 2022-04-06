@@ -1,0 +1,46 @@
+[tool.poetry]
+name = "py5-sandbox"
+version = "0.1.0"
+description = "py5 sandbox"
+authors = ["zztkm <takumi.basket1682@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+py5 = "^0.7.2-alpha.0"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^4.0.1"
+black = "^22.3.0"
+isort = "^5.10.1"
+mypy = "^0.942"
+pytest = "^7.1.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+target-version = ['py39']
+line-length = 120
+
+[tool.isort]
+line_length = 120
+multi_line_output = 3
+include_trailing_comma = true
+known_local_folder=['config',]
+
+[tool.flake8]
+max-line-length = 120
+max-complexity = 18
+ignore = "E203,E266,W503,"
+
+[tool.mypy]
+python_version = "3.9"
+no_strict_optional = true
+ignore_missing_imports = true
+check_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests",]
+filterwarnings = ["ignore::DeprecationWarning",]
