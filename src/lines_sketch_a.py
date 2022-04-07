@@ -1,29 +1,27 @@
 import random
-
 from typing import List
+
+from utils import get_timestamp
+
 from py5 import Sketch
+from py5_tools import screenshot
 
 
 class Line:
-    def __init__(self, ax: int, ay: int, bx: int, by: int, color: str) -> None:
+    def __init__(self, ax: int, ay: int, bx: int, by: int, color: str, parentObj: Sketch) -> None:
         self.ax = ax
         self.ay = ay
         self.bx = bx
         self.by = by
         self.color = color
-
-    def set_stroke(self, stroke) -> None:
-        self.stroke = stroke
-
-    def set_line(self, line) -> None:
-        self.line = line
+        self.parentObj = parentObj
 
     def draw(self) -> None:
         r = int(self.color[0:2], 16)
         g = int(self.color[2:4], 16)
         b = int(self.color[4:], 16)
-        self.stroke(r, g, b)
-        self.line(self.ax, self.ay, self.bx, self.by)
+        self.parentObj.stroke(r, g, b)
+        self.parentObj.line(self.ax, self.ay, self.bx, self.by)
 
     def update_ax(self, ax) -> None:
         self.ax = ax
@@ -48,16 +46,13 @@ class LinesSketchA(Sketch):
         # urlからカラーコード部分を取得し、`-` 区切りのリストを生成
         # 生成されたリストの要素それぞれに `#` を付け足す
         palette = url.split("/").pop().split("-")
-        print(palette)
 
         n = random.randint(50, 300)
         for i in range(n):
             c = random.choice(palette)
             px = self.random(self.width)
             py = self.random(self.height)
-            line = Line(px, py, self.width, py, c)
-            line.set_line(self.line)
-            line.set_stroke(self.stroke)
+            line = Line(px, py, self.width, py, c, self)
             line.draw()
             self.lines.append(line)
 
@@ -66,3 +61,11 @@ class LinesSketchA(Sketch):
         for line in self.lines:
             line.update_ax(self.random(self.width))
             line.draw()
+
+    def key_typed(self):
+        print(self.key)
+        time_stamp = get_timestamp()
+        print(time_stamp)
+        if self.key == "s":
+            img = screenshot(sketch=self)
+            img.save(f"{time_stamp}.png")

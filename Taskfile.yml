@@ -1,6 +1,6 @@
 # https://taskfile.dev
 
-version: '3'
+version: "3"
 
 vars:
   GREETING: Hello, World!
@@ -14,20 +14,20 @@ tasks:
 
   isort:
     cmds:
-      - poetry run isort
+      - poetry run isort src/
 
   black:
     cmds:
-      - poetry run black
+      - poetry run black src/
 
   mypy:
     cmds:
-      - poetry run mypy
+      - poetry run mypy src/
 
   test:
     cmds:
       - poetry run pytest
-  
+
   run:
     cmds:
       - poetry run python src/main.py
