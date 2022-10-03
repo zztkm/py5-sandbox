@@ -1,10 +1,10 @@
 import random
 from typing import List
 
-from utils import get_timestamp
-
 from py5 import Sketch
 from py5_tools import screenshot
+
+from utils import get_timestamp
 
 
 class Line:
